@@ -1,10 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withAuth0 } from '@auth0/auth0-react';
+
 import { Card, Jumbotron,Button} from 'react-bootstrap/';
 import axios from 'axios';
 import './BestBooks.css';
 import Model from './components/Model'
+
 // import Jumbotron from 'react-bootstrap/Jumbotron';
 
 
@@ -15,7 +17,9 @@ class MyFAVORITEBooK extends React.Component {
 
     this.state = {
       TheUsersBooks: [],
+
      showtheform:false,
+
       userEmail: ''
     }
   }
@@ -27,8 +31,11 @@ class MyFAVORITEBooK extends React.Component {
 
 
 
+
   
   // let url = `http://localhost:3001/books?userEmail=mamoun.alshishani@yahoo.com`;
+
+
   componentDidMount = async () => {
     let url =`${process.env.REACT_APP_SERVER_URL}/books?usermail=${this.props.auth0.user.email}`
 
@@ -38,6 +45,7 @@ class MyFAVORITEBooK extends React.Component {
       TheUsersBooks: getData.data,
       
     });
+
 
   }
 
@@ -123,6 +131,7 @@ await this.setState({
         <p>
           This is a collection of my favorite books
         </p>
+
      <Button onClick={this.showForm}>add a book</Button>
 
 
@@ -132,9 +141,9 @@ await this.setState({
         {  
          this.state.TheUsersBooks.map((ele,index)=> {
 
-
             return (
               <>
+
               <Card className="book" style={{ width: '18rem', backgroundColor: 'lightgrey', boxShadow: '2px 2px 2px black' ,display:'-ms-flexbox'}} >
 
                 <Card.Body>
@@ -148,7 +157,9 @@ await this.setState({
                   status : {ele.status}
                   </Card.Text>
                 </Card.Body>
+
                 <Button variant="beware" onClick ={()=> this.removebooks(index)}>remove</Button>
+
               </Card>
               </>
             );
