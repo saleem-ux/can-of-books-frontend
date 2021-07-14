@@ -60,7 +60,7 @@ class MyFAVORITEBooK extends React.Component {
 
             return (
               <>
-              <Card className="book" style={{ width: '18rem', backgroundColor: 'lightgrey', boxShadow: '2px 2px 2px black' }} >
+              <Card className="book" style={{ width: '18rem', backgroundColor: 'lightgrey', boxShadow: '2px 2px 2px black' ,display:'-ms-flexbox'}} >
 
                 <Card.Body>
                   <Card.Title>name : {ele.name}</Card.Title>
