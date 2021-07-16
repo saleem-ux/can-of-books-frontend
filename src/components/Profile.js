@@ -2,7 +2,8 @@
   
 import React, { Component } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Card} from 'react-bootstrap/'
 class Profile extends Component {
     render() {
         const { user, isAuthenticated } = this.props.auth0;
@@ -11,9 +12,22 @@ class Profile extends Component {
             <>
                 {isAuthenticated &&
                     <>
-                        <div>Hello {user.name}</div>
-                        <div>Hello {user.email}</div>
+  <Card className="book" style={{ width: '18rem', backgroundColor: 'lightgrey', boxShadow: '2px 2px 2px black' ,display:'-ms-flexbox'}} >
+
+<Card.Body>
+  <Card.Title>Hello {user.name}</Card.Title>
+  
+  <Card.Text>
+  Hello {user.email}
+  </Card.Text>
+ 
+</Card.Body>
+</Card>
+                    
+                        {/* <div></div> */}
+                        {/* <div></div> */}
                     </>
+                    
                 }
             </>
         );
