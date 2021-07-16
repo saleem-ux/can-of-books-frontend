@@ -15,22 +15,22 @@ class addingModel extends React.Component {
                         <Form onSubmit={this.props.handletheform}>
                             <Form.Group className="formstyle" >
                                 <Form.Label>your book Name</Form.Label>
-                                <Form.Control type="text" placeholder="write the book name" name="name" />
+                                <Form.Control type="text" placeholder="write the book name" name="bookName" />
                             </Form.Group>
 
                             <Form.Group className="formstyle" >
                                 <Form.Label>Books Description</Form.Label>
-                                <Form.Control type="text" placeholder="write Description for the book" name="description" />
+                                <Form.Control type="text" placeholder="write Description for the book" name="bookDescription" />
                             </Form.Group>
 
                             <Form.Group className="formstyle" >
                                 <Form.Label>Books Status</Form.Label>
-                                <Form.Control type="text" placeholder="Status" name="status" />
+                                <Form.Control type="text" placeholder="Status" name="bookstatus" />
                             </Form.Group>
 
                             <Form.Group className="formstyle" >
                                 <Form.Label>Books Image</Form.Label>
-                                <Form.Control type="text" placeholder="Image Link here" name="Img" />
+                                <Form.Control type="text" placeholder="Image Link here" name="bookImg" />
                             </Form.Group>
                              <Modal.Footer>
                                 <Button variant="secondary" onClick={this.props.CloseTheform}>

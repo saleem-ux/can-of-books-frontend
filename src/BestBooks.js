@@ -63,15 +63,18 @@ class MyFAVORITEBooK extends React.Component {
       showtheform: false
     })
     let addbookForm ={
-  
-      name:event.target.name.value,
-      email:this.state.usermail,
-      description:event.target.description.value,
-      Img:event.target.Img.value,
-      status:event.target.status.value,
-    }
+    
+    
       
-      let url =`${process.env.REACT_APP_SERVER_URL}/addbooks`;
+      bookName:event.target.bookName.value,
+      email:this.props.auth0.user.email,
+      bookDescription:event.target.bookDescription.value,
+      bookImg:event.target.bookImg.value,
+      bookstatus:event.target.bookstatus.value,
+    }
+    
+    // http://localhost:3001/addbooks?usermail=addbooks
+      let url ='http://localhost:3001/books';
       let addRes=  await axios.post(url, addbookForm);
       
       
@@ -83,23 +86,24 @@ class MyFAVORITEBooK extends React.Component {
       
   }
 
-  
+ 
 
 
-removebooks =async(index)=>{
+removebooks = async(index)=>{
 
 let paramobject ={
 
-email : this.state.usermail
+email : this.props.auth0.user.email,
 
 
-}
-let url =`${process.env.REACT_APP_SERVER_URL}/removebooks/${index}`;
-
-let removeData = await axios.delete(url,{params:paramobject});
+};
+const responseremove = await axios.delete(
+  `http://localhost:3001/removebooks/${index}`,
+  { params: paramobject }
+);
 
 await this.setState({
-  TheUsersBooks:  removeData.data
+  TheUsersBooks: responseremove.data
   
 });
 
@@ -135,6 +139,7 @@ await this.setState({
 
             return (
               <>
+              <div key={index}>
               <Card className="book" style={{ width: '18rem', backgroundColor: 'lightgrey', boxShadow: '2px 2px 2px black' ,display:'-ms-flexbox'}} >
 
                 <Card.Body>
@@ -150,6 +155,7 @@ await this.setState({
                 </Card.Body>
                 <Button variant="beware" onClick ={()=> this.removebooks(index)}>remove</Button>
               </Card>
+              </div>
               </>
             );
           })}

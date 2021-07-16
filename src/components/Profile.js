@@ -16,11 +16,10 @@ class Profile extends Component {
 <Card.Body>
   <Card.Title>Hello {user.name}</Card.Title>
   
-
   <Card.Text>
   Hello {user.email}
   </Card.Text>
-  <Card.Img variant="top" src={user.Img} alt={user.name} />
+ 
 </Card.Body>
 </Card>
                     
