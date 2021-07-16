@@ -3,7 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
 import LoginButton from './components/LoginButton'
+
 import LogoutButton from './components/LogoutButton'
+
+
 import { withAuth0 } from '@auth0/auth0-react';
 
 class Header extends React.Component {
