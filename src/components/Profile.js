@@ -12,7 +12,9 @@ class Profile extends Component {
                 {isAuthenticated &&
                     <>
                         <div>Hello {user.name}</div>
-                        <div>Hello {user.email}</div>
+                        <div>Email {user.email}</div>
+                        <div><img src={user.picture} alt={user.name}></img></div>
+
                     </>
                 }
             </>
