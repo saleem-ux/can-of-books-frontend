@@ -7,6 +7,7 @@ import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import './BestBooks.css';
 import AddBookForm from './components/AddBookForm';
 
+
 class MyFavoriteBooks extends React.Component {
 
   constructor(props) {
@@ -87,6 +88,7 @@ class MyFavoriteBooks extends React.Component {
   render() {
     return (
       <Jumbotron>
+
         <>
           <h1>My Favorite Books</h1>
           <p>
@@ -96,6 +98,7 @@ class MyFavoriteBooks extends React.Component {
         <Button variant="primary" size="lg" onClick={this.handleModal}>
           Add Book
         </Button>
+
         {this.state.show &&
           this.state.userBooks.map((book, index) => {
             return (
