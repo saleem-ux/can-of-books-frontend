@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import LoginButton from './components/LoginButton'
 import './Login.css';
 
+
 class Login extends React.Component {
   render() {
     return(
@@ -15,8 +16,9 @@ class Login extends React.Component {
           </Card.Text>
 
           {/* TODO: add a `LoginButton` component here that will log the user in with Auth0 */}
-           <LoginButton/>
-           
+
+          <LoginButton/>
+
         </Card.Body>
       </Card>
     )
