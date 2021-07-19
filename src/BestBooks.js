@@ -6,6 +6,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import './BestBooks.css';
 import AddBookForm from './components/AddBookForm';
+import UpdateBookForm from './components/UpdateBookForm';
 
 class MyFavoriteBooks extends React.Component {
 
@@ -14,7 +15,13 @@ class MyFavoriteBooks extends React.Component {
     this.state = {
       userBooks: [],
       show: false,
-      showModal: false
+      showModal: false,
+      showUpdateModal: false,
+      index: 0,
+      updateTitle: '',
+      updateDescription: '',
+      updateImage: '',
+      updateStatus: '',
     }
   }
 
@@ -22,7 +29,7 @@ class MyFavoriteBooks extends React.Component {
 
     const { user } = this.props.auth0;
 
-    let userBooks = await axios.get(`http://localhost:3001/books?userEmail=${user.email}`)
+    let userBooks = await axios.get(`${process.env.REACT_APP_BOOK_SERVER}/books?userEmail=${user.email}`)
     await this.setState({
       userBooks: userBooks.data,
       show: true
@@ -49,12 +56,6 @@ class MyFavoriteBooks extends React.Component {
 
     const { user } = this.props.auth0;
 
-    let addTitle = event.target.addTitle.value;
-    let addDescription = event.target.addDescription.value;
-    let addImage = event.target.addImage.value;
-    let addStatus = event.target.addStatus;
-    let email = user.email
-
     const addBookForm = {
       addTitle: event.target.addTitle.value,
       addDescription: event.target.addDescription.value,
@@ -64,7 +65,7 @@ class MyFavoriteBooks extends React.Component {
     }
     console.log(addBookForm);
 
-    let userBooks = await axios.post(`http://localhost:3001/book`, addBookForm)
+    let userBooks = await axios.post(`${process.env.REACT_APP_BOOK_SERVER}/book`, addBookForm)
 
     this.setState({
       userBooks: userBooks.data
@@ -72,18 +73,57 @@ class MyFavoriteBooks extends React.Component {
     console.log(userBooks.data);
   }
 
+  // ============================ delete book
+
   deleteBook = async (index) => {
     const { user } = this.props.auth0;
     let paramsBook = {
       email: user.email,
     }
-    let userBooks = await axios.delete(`http://localhost:3001/deleteBook/${index}`, { params: paramsBook })
+    let userBooks = await axios.delete(`${process.env.REACT_APP_BOOK_SERVER}/deleteBook/${index}`, { params: paramsBook })
 
     this.setState({
       userBooks: userBooks.data
     })
-
   }
+
+  // ======================================= update book
+
+  showUpdateForm = async (index) => {
+    await this.setState({
+      showUpdateModal: true,
+      index: index,
+      updateTitle: this.state.userBooks[index].name,
+      updateDescription: this.state.userBooks[index].description,
+      updateImage: this.state.userBooks[index].img,
+      updateStatus: this.state.userBooks[index].status,
+    })
+  }
+
+  handleCloseUpdate = () => {
+    this.setState({
+      showUpdateModal: false
+    })
+  }
+
+  updateBook = async (event) => {
+    event.preventDefault();
+    const { user } = this.props.auth0;
+
+    let updateBookObject = {
+      updateTitle: event.target.updateTitle.value,
+      updateDescription: event.target.updateDescription.value,
+      updateImage: event.target.updateImage.value,
+      updateStatus: event.target.updateStatus.value,
+      email: user.email,
+    }
+    let userBooks = await axios.put(`${process.env.REACT_APP_BOOK_SERVER}/updateBook/${this.state.index}`, updateBookObject)
+
+    this.setState({
+      userBooks: userBooks.data
+    })
+  }
+
   render() {
     return (
       <Jumbotron>
@@ -116,6 +156,9 @@ class MyFavoriteBooks extends React.Component {
                           Delete
                         </Button>
                       </Card.Body>
+                      <Button variant="primary" size="lg" onClick={() => this.showUpdateForm(index)} >
+                        Update Book
+                      </Button>
                     </Card>
                   </Col>
                 </Row>
@@ -124,6 +167,15 @@ class MyFavoriteBooks extends React.Component {
           })
         }
         <AddBookForm addBook={this.addBook} handleClose={this.handleClose} handleModal={this.handleModal} show={this.state.showModal} />
+        <UpdateBookForm
+          updateBook={this.updateBook}
+          handleClose={this.handleCloseUpdate}
+          show={this.state.showUpdateModal}
+          updateTitle={this.state.updateTitle}
+          updateDescription={this.state.updateDescription}
+          updateImage={this.state.updateImage}
+          updateStatus={this.state.updateStatus}
+        />
       </Jumbotron>
     )
   }
