@@ -157,7 +157,7 @@ class MyFavoriteBooks extends React.Component {
                         </Button>
                       </Card.Body>
                       <Button variant="primary" size="lg" onClick={() => this.showUpdateForm(index)} >
-                        Update Book
+                        Update
                       </Button>
                     </Card>
                   </Col>
