@@ -34,14 +34,7 @@ class MyFAVORITEBooK extends React.Component {
 
 
 
-   
-
-
-    
-
-
-
-
+  
 
   render() {
 
