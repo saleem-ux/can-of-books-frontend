@@ -35,14 +35,7 @@ class MyFAVORITEBooK extends React.Component {
 
 
 
-   
-
-
-    
-
-
-
-
+  
 
 
 class MyFavoriteBooks extends React.Component {
